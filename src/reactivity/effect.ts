@@ -1,6 +1,6 @@
 import { extend } from "../shared"
 
-class ReactiveEffect {
+export class ReactiveEffect {
 	private _fn: any
 	deps = []
 	active = true
@@ -58,10 +58,10 @@ export function track(target, key) {
 		dep = new Set()
 		depsMap.set(key, dep)
 	}
-	trackEffect(dep)
+	trackEffects(dep)
 }
 
-export function trackEffect(dep) {
+export function trackEffects(dep) {
 	if (dep.has(activeEffect)) return
 	dep.add(activeEffect)
 	activeEffect.deps.push(dep)
@@ -70,10 +70,10 @@ export function trackEffect(dep) {
 export function trigger(target, key) {
 	let depsMap = targetMap.get(target)
 	let dep = depsMap.get(key)
-	triggerEffect(dep)
+	triggerEffects(dep)
 }
 
-export function triggerEffect(dep) {
+export function triggerEffects(dep) {
 	for (const effect of dep) {
 		if (effect.scheduler) {
 			effect.scheduler()
@@ -106,5 +106,5 @@ export function stop(runner) {
 }
 
 export function isTracking() {
-	return shouldTrack && activeEffect != undefined
+	return shouldTrack && activeEffect !== undefined
 }
