@@ -1,3 +1,4 @@
+import { isObject } from "./../shared/index"
 import {
 	mutableHandles,
 	readonlyHandles,
@@ -33,6 +34,10 @@ export function isProxy(value): Boolean {
 	return isReactive(value) || isReadonly(value)
 }
 
-function createActiveObject(raw: any, baseHandles) {
-	return new Proxy(raw, baseHandles)
+function createActiveObject(target: any, baseHandles) {
+	if (!isObject(target)) {
+		console.warn(`target: ${target},必须是一个对象`)
+		return target
+	}
+	return new Proxy(target, baseHandles)
 }

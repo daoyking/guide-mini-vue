@@ -1,4 +1,4 @@
-import { extend, isObject } from "../shared"
+import { extend, isObject } from "../shared/index"
 import { track, trigger } from "./effect"
 import { reactive, ReactiveFlags, readonly } from "./reactive"
 
@@ -53,7 +53,7 @@ export const mutableHandles = {
 export const readonlyHandles = {
 	get: readonlyGet,
 	set(target, key, value) {
-		console.warn(`key:${key}set 失败，因为target是readonly:${target}`)
+		console.warn(`key:${key} set失败，因为target是readonly:${target}`)
 		return true
 	},
 }
