@@ -19,8 +19,12 @@ function patchProp(el, key, prevProp, nextProp) {
 	}
 }
 // 添加到宿主元素中
-function insert(el, parent) {
-	parent.append(el)
+function insert(child, parent, anchor) {
+	// parent.append(el)
+	// console.log("insert:child", child)
+	// console.log("insert:parent", parent)
+	// console.log("insert:anchor", anchor)
+	parent.insertBefore(child, anchor || null)
 }
 
 function remove(child) {
