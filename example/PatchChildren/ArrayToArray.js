@@ -77,12 +77,12 @@ import { h,ref } from '../../lib/guide-mini-vue.esm.js'
 // (b c)
 // i = 0, e1 = 0, e2 = -1
 
-const prevChildren = [
-  h("p", { key: "A" }, "A"),
-  h("p", { key: "B" }, "B"),
-  h("p", { key: "C" }, "C"),
-];
-const nextChildren = [h("p", { key: "B" }, "B"), h("p", { key: "C" }, "C")];
+// const prevChildren = [
+//   h("p", { key: "A" }, "A"),
+//   h("p", { key: "B" }, "B"),
+//   h("p", { key: "C" }, "C"),
+// ];
+// const nextChildren = [h("p", { key: "B" }, "B"), h("p", { key: "C" }, "C")];
 
 // 5. 对比中间的部分
 // 删除老的  (在老的里面存在，新的里面不存在)
@@ -165,27 +165,27 @@ const nextChildren = [h("p", { key: "B" }, "B"), h("p", { key: "C" }, "C")];
 // a,b,(d,c,y,e),f,g
 // 最长子序列： [1,3]
 
-// const prevChildren = [
-//   h("p", { key: "A" }, "A"),
-//   h("p", { key: "B" }, "B"),
-//   h("p", { key: "C" }, "C"),
-//   h("p", { key: "D" }, "D"),
-//   h("p", { key: "E" }, "E"),
-//   h("p", { key: "Z" }, "Z"),
-//   h("p", { key: "F" }, "F"),
-//   h("p", { key: "G" }, "G"),
-// ];
+const prevChildren = [
+  h("p", { key: "A" }, "A"),
+  h("p", { key: "B" }, "B"),
+  h("p", { key: "C" }, "C"),
+  h("p", { key: "D" }, "D"),
+  h("p", { key: "E" }, "E"),
+  h("p", { key: "Z" }, "Z"),
+  h("p", { key: "F" }, "F"),
+  h("p", { key: "G" }, "G"),
+];
 
-// const nextChildren = [
-//   h("p", { key: "A" }, "A"),
-//   h("p", { key: "B" }, "B"),
-//   h("p", { key: "D" }, "D"),
-//   h("p", { key: "C" }, "C"),
-//   h("p", { key: "Y" }, "Y"),
-//   h("p", { key: "E" }, "E"),
-//   h("p", { key: "F" }, "F"),
-//   h("p", { key: "G" }, "G"),
-// ];
+const nextChildren = [
+  h("p", { key: "A" }, "A"),
+  h("p", { key: "B" }, "B"),
+  h("p", { key: "D" }, "D"),
+  h("p", { key: "C" }, "C"),
+  h("p", { key: "Y" }, "Y"),
+  h("p", { key: "E" }, "E"),
+  h("p", { key: "F" }, "F"),
+  h("p", { key: "G" }, "G"),
+];
 
 // 3. 创建新的节点
 // a,b,(c,e),f,g
