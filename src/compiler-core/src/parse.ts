@@ -16,8 +16,34 @@ function parseChildren(context) {
 			node = parseElement(context)
 		}
 	}
+
+	if (!node) {
+		node = parseText(context)
+	}
+
 	nodes.push(node)
 	return nodes
+}
+
+function parseText(context) {
+	//1.获取内容 content
+	const content = parseTextData(context, context.source.length)
+	// 2. 推进 -》 删除处理完成的代码？？？
+	// advanceBy(context, content.length)
+
+	return {
+		type: NodeTypes.TEXT,
+		content,
+	}
+}
+
+function parseTextData(context, length) {
+	const content = context.source.slice(0, length)
+
+	// 2. 推进 -》 删除处理完成的代码？？？
+	advanceBy(context, length)
+
+	return content
 }
 
 const enum TagType {
@@ -30,7 +56,7 @@ function parseElement(context) {
 
 	parseTag(context, TagType.END)
 
-	console.log(context.source, "1111")
+	// console.log(context.source, "1111")
 
 	return element
 }
@@ -63,13 +89,13 @@ function parseInterpolation(context) {
 	advanceBy(context, openDelimiter.length)
 
 	const rawContentLength = closeIndex - openDelimiter.length
-	const rawContent = context.source.slice(0, rawContentLength)
+	const rawContent = parseTextData(context, rawContentLength) //context.source.slice(0, rawContentLength)
 	const content = rawContent.trim()
 
 	// context.source = context.source.slice(
 	// 	rawContentLength + closeDelimiter.length
 	// )
-	advanceBy(context, rawContentLength + closeDelimiter.length)
+	advanceBy(context, closeDelimiter.length)
 	return {
 		type: NodeTypes.INTERPOLATION,
 		content: {
