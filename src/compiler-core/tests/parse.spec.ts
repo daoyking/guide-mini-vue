@@ -4,14 +4,14 @@ import { baseParse } from "../src/parse"
 describe("Parse", () => {
 	describe("interpolation", () => {
 		test("simple interpolation", () => {
-			const ast: any = baseParse("{{massage}}")
+			const ast: any = baseParse("{{message}}")
 
 			// root
 			expect(ast.children[0]).toStrictEqual({
 				type: NodeTypes.INTERPOLATION,
 				content: {
 					type: NodeTypes.SIMPLE_EXPRESSION,
-					content: "massage",
+					content: "message",
 				},
 			})
 		})
@@ -39,7 +39,7 @@ describe("Parse", () => {
 	})
 
 	test("hello, world", () => {
-		const ast: any = baseParse("<div>hi,{{massage}}</div>")
+		const ast: any = baseParse("<div>hi,{{message}}</div>")
 
 		expect(ast.children[0]).toStrictEqual({
 			type: NodeTypes.ELEMENT,
@@ -53,7 +53,7 @@ describe("Parse", () => {
 					type: NodeTypes.INTERPOLATION,
 					content: {
 						type: NodeTypes.SIMPLE_EXPRESSION,
-						content: "massage",
+						content: "message",
 					},
 				},
 			],
@@ -61,7 +61,7 @@ describe("Parse", () => {
 	})
 
 	test("Nested element", () => {
-		const ast: any = baseParse("<div><p>hi</p>{{massage}}</div>")
+		const ast: any = baseParse("<div><p>hi</p>{{message}}</div>")
 
 		expect(ast.children[0]).toStrictEqual({
 			type: NodeTypes.ELEMENT,
@@ -81,7 +81,7 @@ describe("Parse", () => {
 					type: NodeTypes.INTERPOLATION,
 					content: {
 						type: NodeTypes.SIMPLE_EXPRESSION,
-						content: "massage",
+						content: "message",
 					},
 				},
 			],

@@ -33,7 +33,7 @@ function parseChildren(context, ancestors) {
 }
 
 function isEnd(context, ancestors) {
-	console.log("isEnd:", ancestors)
+	// console.log("isEnd:", ancestors)
 	const s = context.source
 	// 2.遇到为结束标签
 	// if (ancestors && s.startsWith(`</${ancestors}>`)) {
