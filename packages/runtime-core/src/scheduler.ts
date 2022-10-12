@@ -1,27 +1,42 @@
-const queue: any[] = []
-let isFlushPending = false
-const p = Promise.resolve()
+const queue: any[] = [];
+const activePreFlushCbs: any[] = [];
+let isFlushPending = false;
+const p = Promise.resolve();
 export function queueJobs(job) {
 	if (!queue.includes(job)) {
-		queue.push(job)
+		queue.push(job);
 	}
-	queueFlush()
+	queueFlush();
 }
 
-export function nextTick(fn) {
-	return fn ? p.then(fn) : p
+export function nextTick(fn?) {
+	return fn ? p.then(fn) : p;
 }
 
 function queueFlush() {
-	if (isFlushPending) return
-	isFlushPending = true
-	nextTick(flushJobs)
+	if (isFlushPending) return;
+	isFlushPending = true;
+	nextTick(flushJobs);
 }
 
 function flushJobs() {
-	isFlushPending = false
-	let job
+	isFlushPending = false;
+
+	flushPrevFlushCbs();
+
+	let job;
 	while ((job = queue.shift())) {
-		job && job()
+		job && job();
 	}
+}
+
+function flushPrevFlushCbs() {
+	for (let i = 0; i < activePreFlushCbs.length; i++) {
+		activePreFlushCbs[i]();
+	}
+}
+
+export function queuePreFlushCb(cb) {
+	activePreFlushCbs.push(cb);
+	queueFlush();
 }
