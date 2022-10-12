@@ -36,7 +36,7 @@ function flushPrevFlushCbs() {
 	}
 }
 
-export function queuePreFlushCb(cb) {
-	activePreFlushCbs.push(cb);
+export function queuePreFlushCb(job) {
+	activePreFlushCbs.push(job);
 	queueFlush();
 }
